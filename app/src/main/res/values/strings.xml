@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Cover Test</string>
+    <string name="launch_ques_flow_button_text">Launch Question Flow</string>
 </resources>
