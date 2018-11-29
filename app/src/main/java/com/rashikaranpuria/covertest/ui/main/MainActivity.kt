@@ -24,10 +24,14 @@ class MainActivity: BaseActivity(), IMainActivityView {
         initClickListeners()
     }
 
-    fun initClickListeners() {
+    override fun initClickListeners() {
         launch_question_flow_button.onClick {
-            startActivity(Intent(this@MainActivity, AddressPickerActivity::class.java))
+            mainActivityPresenter.launchQuestionFlowButtonClicked()
         }
+    }
+
+    override fun launchAddressPickerActivity() {
+        startActivity(Intent(this@MainActivity, AddressPickerActivity::class.java))
     }
 
     override fun onDestroy() {
