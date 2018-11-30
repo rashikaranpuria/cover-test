@@ -8,7 +8,6 @@ import com.rashikaranpuria.covertest.di.module.MainActivityModule
 import com.rashikaranpuria.covertest.ui.addresspicker.AddressPickerActivity
 import com.rashikaranpuria.covertest.ui.base.BaseActivity
 import kotlinx.android.synthetic.main.activity_main.*
-import org.jetbrains.anko.sdk25.coroutines.onClick
 import javax.inject.Inject
 
 class MainActivity : BaseActivity(), IMainActivityView {

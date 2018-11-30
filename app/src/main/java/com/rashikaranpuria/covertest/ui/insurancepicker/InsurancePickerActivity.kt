@@ -11,7 +11,6 @@ import com.rashikaranpuria.covertest.ui.base.BaseActivity
 import com.rashikaranpuria.covertest.ui.main.MainActivity
 import kotlinx.android.synthetic.main.activity_insurance_picker.*
 import org.jetbrains.anko.alert
-import org.jetbrains.anko.sdk25.coroutines.onClick
 import org.jetbrains.anko.yesButton
 import javax.inject.Inject
 

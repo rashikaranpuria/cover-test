@@ -1,7 +1,6 @@
 package com.rashikaranpuria.covertest.ui.addresspicker
 
 import com.rashikaranpuria.covertest.ImmediateSchedulerRule
-import com.rashikaranpuria.covertest.R
 import com.rashikaranpuria.covertest.data.DataManager
 import com.rashikaranpuria.covertest.data.api.model.PlacesResponse.PlacesSearchResponse
 import com.rashikaranpuria.covertest.data.api.model.PlacesResponse.PredictionsItem
@@ -11,10 +10,11 @@ import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
-import org.mockito.ArgumentMatchers
+import org.mockito.ArgumentMatchers.anyInt
+import org.mockito.ArgumentMatchers.anyString
 import org.mockito.InjectMocks
 import org.mockito.Mock
-import org.mockito.Mockito.*
+import org.mockito.Mockito.verify
 import org.mockito.Mockito.`when` as _when
 import org.mockito.MockitoAnnotations
 import java.io.IOException

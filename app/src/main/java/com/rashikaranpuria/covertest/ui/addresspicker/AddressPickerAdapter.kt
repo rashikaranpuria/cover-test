@@ -8,7 +8,6 @@ import android.widget.TextView
 import com.rashikaranpuria.covertest.ItemClickListener
 import com.rashikaranpuria.covertest.R
 import com.rashikaranpuria.covertest.data.api.model.PlacesResponse.PredictionsItem
-import org.jetbrains.anko.sdk25.coroutines.onClick
 import kotlin.properties.Delegates
 
 class AddressPickerAdapter : RecyclerView.Adapter<AddressPickerAdapter.ViewHolder>(), AutoUpdatableAdapter {
