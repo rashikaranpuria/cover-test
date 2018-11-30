@@ -5,7 +5,7 @@ import com.rashikaranpuria.covertest.di.component.AppComponent
 import com.rashikaranpuria.covertest.di.component.DaggerAppComponent
 import com.rashikaranpuria.covertest.di.module.AppModule
 
-open class CoverApplication: Application() {
+open class CoverApplication : Application() {
     lateinit var appComponent: AppComponent
 
     override fun onCreate() {

@@ -2,4 +2,7 @@
 <resources>
     <dimen name="padding_button">16dp</dimen>
     <dimen name="elevation_button">4dp</dimen>
+    <dimen name="dropdown_padding">8dp</dimen>
+    <dimen name="line_space">8dp</dimen>
+    <dimen name="searchTextSize">20sp</dimen>
 </resources>

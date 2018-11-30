@@ -3,7 +3,7 @@ package com.rashikaranpuria.covertest.ui.base
 import android.support.v7.app.AppCompatActivity
 import org.jetbrains.anko.toast
 
-open class BaseActivity: AppCompatActivity(), IBaseView {
+open class BaseActivity : AppCompatActivity(), IBaseView {
 
     override fun showError(errorStr: String) {
         toast(errorStr)

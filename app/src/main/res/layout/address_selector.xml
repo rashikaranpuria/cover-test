@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:id="@+id/parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:foreground="?selectableItemBackground"
+    android:background="@color/white"
+    android:padding="@dimen/dropdown_padding">
+
+    <TextView
+        android:id="@+id/primary_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        tools:text="1232 Bouleward Street"
+    />
+
+    <TextView
+        android:id="@+id/secondary_text"
+        android:layout_marginTop="@dimen/line_space"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="Sa, Cs, Country"/>
+
+</LinearLayout>

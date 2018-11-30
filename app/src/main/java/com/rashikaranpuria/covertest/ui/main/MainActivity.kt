@@ -11,7 +11,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.sdk25.coroutines.onClick
 import javax.inject.Inject
 
-class MainActivity: BaseActivity(), IMainActivityView {
+class MainActivity : BaseActivity(), IMainActivityView {
 
     @Inject
     lateinit var mainActivityPresenter: IMainPresenter<IMainActivityView>

@@ -28,5 +28,4 @@ class MainPresenterTest {
         // then launchAddressPickerActivity called
         verify(mainActivity).launchAddressPickerActivity()
     }
-
 }

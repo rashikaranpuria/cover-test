@@ -1,4 +1,13 @@
 <resources>
     <string name="app_name">Cover Test</string>
     <string name="launch_ques_flow_button_text">Launch Question Flow</string>
+    <string name="what_s_your_address">What\'s your address?</string>
+    <string name="next">Next</string>
+    <string name="address_hint">e.g. 123 Main Street</string>
+    <string name="invalid_option_selected">Select one of the options to continue</string>
+    <string name="no_option_error_title">No option selected</string>
+    <string name="what_s_your_insurer">What\'s your current insurer?</string>
+    <string name="insurer_hint">e.g. Geico</string>
+    <string name="address_picker_activity_title">Pick your address</string>
+    <string name="insurance_picker_activity_title">Pick your insurer</string>
 </resources>

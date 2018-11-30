@@ -18,5 +18,4 @@ class AppModule {
     @Provides
     @Singleton
     fun provideApiManager(mApiManager: ApiManager) = mApiManager as IApiManager
-
 }
