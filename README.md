@@ -1,4 +1,4 @@
-# cover-test
+# Cover Test [![Build Status](https://travis-ci.org/rashikaranpuria/cover-test.svg?branch=master)](https://travis-ci.org/rashikaranpuria/cover-test)
 An application that contains 2 screens that ask autocomplete questions. One screen uses the Google Maps address API and the other uses a local array.
 
 ## Build Instructions
