@@ -3,10 +3,9 @@ package com.rashikaranpuria.covertest.ui.addresspicker
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.view.MenuItem
-import com.jakewharton.rxbinding.view.RxView
-import com.jakewharton.rxbinding.widget.RxTextView
+import com.jakewharton.rxbinding2.view.RxView
+import com.jakewharton.rxbinding2.widget.RxTextView
 import com.rashikaranpuria.covertest.CoverApplication
 import com.rashikaranpuria.covertest.ItemClickListener
 import com.rashikaranpuria.covertest.R
@@ -14,11 +13,12 @@ import com.rashikaranpuria.covertest.data.api.model.PlacesResponse.PredictionsIt
 import com.rashikaranpuria.covertest.di.module.AddressPickerModule
 import com.rashikaranpuria.covertest.ui.base.BaseActivity
 import com.rashikaranpuria.covertest.ui.insurancepicker.InsurancePickerActivity
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.rxkotlin.subscribeBy
 import kotlinx.android.synthetic.main.activity_address_picker.*
 import org.jetbrains.anko.alert
 import org.jetbrains.anko.yesButton
-import rx.Subscription
-import rx.android.schedulers.AndroidSchedulers
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
@@ -30,8 +30,8 @@ class AddressPickerActivity : BaseActivity(), IAddressPickerView {
     @Inject
     lateinit var addressPickerAdapter: AddressPickerAdapter
 
-    lateinit var addressPickerTextChangeSubscription: Subscription
-    lateinit var nextButtonClickSubscription: Subscription
+    @Inject
+    lateinit var mCompositeDisposable: CompositeDisposable
 
     lateinit var addressItemClickListener: ItemClickListener<PredictionsItem>
 
@@ -50,7 +50,7 @@ class AddressPickerActivity : BaseActivity(), IAddressPickerView {
     }
 
     override fun initAddressPickerAdapter() {
-        address_suggestion_recycler.layoutManager = LinearLayoutManager(this) as RecyclerView.LayoutManager?
+        address_suggestion_recycler.layoutManager = LinearLayoutManager(this)
         addressPickerAdapter.items = listOf()
         addressPickerAdapter.itemClickListener = addressItemClickListener
         address_suggestion_recycler.adapter = addressPickerAdapter
@@ -62,28 +62,29 @@ class AddressPickerActivity : BaseActivity(), IAddressPickerView {
 
     override fun initClickListeners() {
 
-        addressPickerTextChangeSubscription = RxTextView.textChanges(address_autocomplete)
-            .doOnEach {
-                // tell presenter that text changed
-                addressPickerPresenter.notifyTextChanged()
-            }
-            .filter { cs: CharSequence? -> !cs.isNullOrEmpty() && cs!!.length > 1 }
-            .debounce(400, TimeUnit.MILLISECONDS)
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(
-                {
-                    // on complete
-                    addressPickerPresenter.notifyDelayedDebouncedTextChange(it.toString())
-                },
-                {
-                    // on error
-                    showError("ERROR: ${it.message}")
+        mCompositeDisposable.addAll(
+            RxTextView.textChanges(address_autocomplete)
+                .doOnEach {
+                    // tell presenter that text changed
+                    addressPickerPresenter.notifyTextChanged()
                 }
-            )
-
-        nextButtonClickSubscription = RxView.clicks(next_button).subscribe {
-            addressPickerPresenter.nextButtonClicked(address_autocomplete.text.toString())
-        }
+                .filter { cs: CharSequence? -> !cs.isNullOrEmpty() && cs.length > 1 }
+                .debounce(400, TimeUnit.MILLISECONDS)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeBy(
+                    onNext = {
+                        addressPickerPresenter.notifyDelayedDebouncedTextChange(it.toString())
+                    },
+                    onError = {
+                        showError(R.string.error, it.message)
+                    }
+                ),
+            RxView.clicks(next_button)
+                .subscribeBy {
+                addressPickerPresenter
+                    .nextButtonClicked(address_autocomplete.text.toString())
+            }
+        )
 
         addressItemClickListener = object : ItemClickListener<PredictionsItem> {
 
@@ -132,8 +133,7 @@ class AddressPickerActivity : BaseActivity(), IAddressPickerView {
 
     override fun onDestroy() {
         super.onDestroy()
-        addressPickerTextChangeSubscription.unsubscribe()
-        nextButtonClickSubscription.unsubscribe()
+        mCompositeDisposable.dispose()
         addressPickerPresenter.onDetach()
     }
 }

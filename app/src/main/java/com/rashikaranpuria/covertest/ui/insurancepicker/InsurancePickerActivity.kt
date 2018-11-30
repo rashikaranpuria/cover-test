@@ -41,7 +41,7 @@ class InsurancePickerActivity : BaseActivity(), IInsurancePickerView {
 
     override fun initClickListeners() {
 
-        next_button.onClick {
+        next_button.setOnClickListener {
             insurancePickerPresenter.nextButtonClicked(insurer_autocomplete.text.toString())
         }
     }

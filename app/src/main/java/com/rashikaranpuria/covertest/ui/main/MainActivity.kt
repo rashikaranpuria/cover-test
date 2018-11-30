@@ -25,7 +25,7 @@ class MainActivity : BaseActivity(), IMainActivityView {
     }
 
     override fun initClickListeners() {
-        launch_question_flow_button.onClick {
+        launch_question_flow_button.setOnClickListener {
             mainActivityPresenter.launchQuestionFlowButtonClicked()
         }
     }

@@ -20,4 +20,8 @@ open class BaseActivity : AppCompatActivity(), IBaseView {
     override fun showMessage(messageId: Int) {
         toast(getString(messageId))
     }
+
+    override fun showError(errorId: Int, localizedMessage: String?) {
+        toast(getString(errorId, localizedMessage))
+    }
 }

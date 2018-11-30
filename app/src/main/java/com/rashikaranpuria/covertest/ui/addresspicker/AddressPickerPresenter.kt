@@ -1,5 +1,6 @@
 package com.rashikaranpuria.covertest.ui.addresspicker
 
+import com.rashikaranpuria.covertest.R
 import com.rashikaranpuria.covertest.data.DataManager
 import com.rashikaranpuria.covertest.data.api.model.PlacesResponse.PredictionsItem
 import com.rashikaranpuria.covertest.ui.base.BasePresenter
@@ -31,7 +32,7 @@ class AddressPickerPresenter<V : IAddressPickerView> @Inject constructor(val mCo
                         view?.setAddressSuggestionInAdapter(it.predictions)
                     },
                     onError = {
-                        view?.showError("Error: Failed to fetch data ${it.localizedMessage}")
+                        view?.showError(R.string.get_suggestions_failed, it.localizedMessage)
                     }
                 )
         )

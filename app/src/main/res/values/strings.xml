@@ -10,4 +10,6 @@
     <string name="insurer_hint">e.g. Geico</string>
     <string name="address_picker_activity_title">Pick your address</string>
     <string name="insurance_picker_activity_title">Pick your insurer</string>
+    <string name="get_suggestions_failed">Error: Failed to fetch data %s</string>
+    <string name="error">Error: %s</string>
 </resources>

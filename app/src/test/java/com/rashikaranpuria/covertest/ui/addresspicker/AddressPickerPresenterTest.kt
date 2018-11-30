@@ -1,6 +1,7 @@
 package com.rashikaranpuria.covertest.ui.addresspicker
 
 import com.rashikaranpuria.covertest.ImmediateSchedulerRule
+import com.rashikaranpuria.covertest.R
 import com.rashikaranpuria.covertest.data.DataManager
 import com.rashikaranpuria.covertest.data.api.model.PlacesResponse.PlacesSearchResponse
 import com.rashikaranpuria.covertest.data.api.model.PlacesResponse.PredictionsItem
@@ -13,8 +14,8 @@ import org.junit.Test
 import org.mockito.ArgumentMatchers
 import org.mockito.InjectMocks
 import org.mockito.Mock
+import org.mockito.Mockito.*
 import org.mockito.Mockito.`when` as _when
-import org.mockito.Mockito.verify
 import org.mockito.MockitoAnnotations
 import java.io.IOException
 
@@ -112,7 +113,7 @@ class AddressPickerPresenterTest {
         _when(mDataManager.getAddressSuggestions(dummyAddressText)).thenReturn(Single.error(IOException("")))
         addressPickerPresenter.notifyDelayedDebouncedTextChange(dummyAddressText)
         // then verify view set suggestions in adapter called
-        verify(addressPickerActivity).showError(ArgumentMatchers.anyString())
+        verify(addressPickerActivity).showError(anyInt(), anyString())
     }
 
     @Test

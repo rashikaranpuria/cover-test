@@ -7,6 +7,7 @@ import com.rashikaranpuria.covertest.R
 import com.rashikaranpuria.covertest.data.api.model.PlacesResponse.PredictionsItem
 import com.rashikaranpuria.covertest.data.api.model.PlacesResponse.StructuredFormatting
 import com.rashikaranpuria.covertest.ui.insurancepicker.InsurancePickerActivity
+import io.reactivex.disposables.CompositeDisposable
 import junit.framework.Assert
 import junit.framework.Assert.assertEquals
 import junit.framework.Assert.assertTrue
@@ -21,10 +22,9 @@ import org.mockito.MockitoAnnotations
 import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.Shadows
+import org.robolectric.android.controller.ActivityController
 import org.robolectric.annotation.Config
 import org.robolectric.shadows.ShadowAlertDialog
-import org.robolectric.android.controller.ActivityController
-import rx.Subscription
 
 @RunWith(RobolectricTestRunner::class)
 @Config(constants = BuildConfig::class, application = FakeApplication::class, sdk = [21])
@@ -37,9 +37,7 @@ class AddressPickerActivityTest {
     lateinit var addressPickerAdapter: AddressPickerAdapter
 
     @Mock
-    lateinit var addressPickerTextChangeSubscription: Subscription
-    @Mock
-    lateinit var nextButtonClickSubscription: Subscription
+    lateinit var mCompositeDisposable: CompositeDisposable
 
     @InjectMocks
     lateinit var addressPickerActivity: AddressPickerActivity
@@ -61,8 +59,7 @@ class AddressPickerActivityTest {
         addressPickerActivity = controller.create().get()
         addressPickerActivity.addressPickerPresenter = addressPickerPresenter
         addressPickerActivity.addressPickerAdapter = addressPickerAdapter
-        addressPickerActivity.addressPickerTextChangeSubscription = addressPickerTextChangeSubscription
-        addressPickerActivity.nextButtonClickSubscription = nextButtonClickSubscription
+        addressPickerActivity.mCompositeDisposable = mCompositeDisposable
     }
 
     @Test
@@ -152,14 +149,13 @@ class AddressPickerActivityTest {
     }
 
     @Test
-    fun whenActivityIsGoingToBeDestroyed_thenPresenterDetached() {
+    fun whenActivityIsGoingToBeDestroyed_thenPresenterDetachedAndCompositeDisposableDisposed() {
         // when activity on destroy
         controller.pause().stop().destroy()
         // then verify presenter detached
         verify(addressPickerPresenter).onDetach()
         // also all subscriptions unsubscribed
-        verify(addressPickerTextChangeSubscription).unsubscribe()
-        verify(nextButtonClickSubscription).unsubscribe()
+        verify(mCompositeDisposable).dispose()
     }
 
     @Test

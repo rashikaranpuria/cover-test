@@ -38,8 +38,7 @@ class AddressPickerAdapter : RecyclerView.Adapter<AddressPickerAdapter.ViewHolde
             primaryTextView.text = predictionsItem?.structuredFormatting?.mainText
             secondaryTextView.text = predictionsItem?.structuredFormatting?.secondaryText
 //            parentView.backgroundColor = R.color.white
-
-            parentView.onClick {
+            parentView.setOnClickListener {
                 if (predictionsItem != null) {
                     itemClickListener?.onItemClicked(predictionsItem)
                 }
