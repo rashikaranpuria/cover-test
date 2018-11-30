@@ -57,18 +57,4 @@ class AddressPickerAdapterTest {
         val viewHolder = adapter.onCreateViewHolder(rv, 0)
         assertTrue(viewHolder is AddressPickerAdapter.ViewHolder)
     }
-
-//    @Test
-//    fun djnf() {
-//
-//        items = listOf(PredictionsItem(id = "1"))
-//
-//        `when`(items.get(anyInt())).thenReturn(PredictionsItem(id = "4"))
-//        val rv = RecyclerView(context)
-//        rv.layoutManager = LinearLayoutManager(context)
-//        viewHolder = adapter.onCreateViewHolder(rv, 0)
-//
-//        adapter.bindViewHolder(viewHolder, 0)
-//        verify(viewHolder).bind(items[0])
-//    }
 }
