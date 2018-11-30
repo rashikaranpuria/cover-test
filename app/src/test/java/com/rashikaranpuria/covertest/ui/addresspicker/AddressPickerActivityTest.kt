@@ -70,14 +70,6 @@ class AddressPickerActivityTest {
         verify(addressPickerAdapter).items = predictions
     }
 
-//    @Test
-//    fun whenAddressAutocompleteTextChangesDebounced_thenPresenterNotifiedOfDataChangedDelayed() {
-//        // when address picker text changed
-//        addressPickerActivity.address_autocomplete.setText(dummyText)
-//        // then presenter notified of text change DEBOUNCED!!!
-//        verify(addressPickerPresenter).notifyDelayedDebouncedTextChange(dummyText)
-//    }
-
     @Test
     fun whenAddressAutocompleteTextChanges_thenPresenterNotifiedOfDataChanged() {
         // when address picker text changed
